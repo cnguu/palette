@@ -1,0 +1,12 @@
+/* 重写色板在文档中的最大宽度，参考 Ant Design 文档 */
+.vp-doc .palette {
+  margin: 16px 0;
+  max-width: 360px;
+}
+
+/* 移动端允许更窄 */
+@media (max-width: 480px) {
+  .vp-doc .palette {
+    max-width: 100%;
+  }
+}

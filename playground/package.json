@@ -6,13 +6,16 @@
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "preview": "vite preview"
+    "build": "vitepress build",
+    "dev": "vitepress dev",
+    "preview": "vitepress preview"
   },
   "dependencies": {
     "@cnguu/palette": "workspace:*"
   },
   "devDependencies": {
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vitepress": "catalog:",
+    "vue": "catalog:"
   }
 }
