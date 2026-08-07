@@ -44,8 +44,10 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@ant-design/colors": "8.0.1",
-    "@ant-design/fast-color": "3.0.1"
+    "@ant-design/colors": "catalog:"
+  },
+  "devDependencies": {
+    "tsdown": "catalog:"
   },
   "engines": {
     "node": ">=24.0.0"

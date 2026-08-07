@@ -26,15 +26,13 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "9.3.0",
-    "@types/node": "26.1.2",
-    "bumpp": "12.2.0",
-    "eslint": "10.8.0",
-    "eslint-plugin-package-json": "1.6.3",
-    "lefthook": "2.1.10",
-    "tsdown": "0.22.14",
-    "typescript": "6.0.3",
-    "vitest": "4.1.10"
+    "@antfu/eslint-config": "catalog:",
+    "@types/node": "catalog:",
+    "bumpp": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-package-json": "catalog:",
+    "lefthook": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "node": ">=24.0.0",

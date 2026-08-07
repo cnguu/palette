@@ -11,6 +11,6 @@
   },
   "devDependencies": {
     "@cnguu/palette": "workspace:*",
-    "vitest": "4.1.10"
+    "vitest": "catalog:"
   }
 }

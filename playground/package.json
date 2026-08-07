@@ -13,6 +13,6 @@
     "@cnguu/palette": "workspace:*"
   },
   "devDependencies": {
-    "vite": "8.2.1"
+    "vite": "catalog:"
   }
 }
