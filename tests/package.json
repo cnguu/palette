@@ -1,0 +1,11 @@
+{
+  "name": "@cnguu/palette-tests",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@cnguu/palette": "workspace:*"
+  }
+}

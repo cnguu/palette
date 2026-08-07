@@ -1,0 +1,27 @@
+{
+  "name": "@cnguu/palette",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "dependencies": {
+    "@ant-design/colors": "8.0.1",
+    "@ant-design/fast-color": "3.0.1"
+  }
+}

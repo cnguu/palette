@@ -1,0 +1,14 @@
+{
+  "name": "@cnguu/palette-playground",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@cnguu/palette": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "8.2.1"
+  }
+}

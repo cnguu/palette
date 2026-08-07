@@ -1,0 +1,25 @@
+{
+  "name": "@cnguu/palette-monorepo",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "多设计调色板",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "pnpm --filter @cnguu/palette build",
+    "dev": "pnpm --filter @cnguu/palette dev",
+    "play": "pnpm --filter @cnguu/palette-playground dev",
+    "test": "pnpm --filter @cnguu/palette-tests test",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "9.3.0",
+    "@types/node": "26.1.2",
+    "bumpp": "12.2.0",
+    "eslint": "10.8.0",
+    "tsdown": "0.22.14",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10"
+  }
+}
