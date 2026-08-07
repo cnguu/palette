@@ -1,4 +1,5 @@
 import antfu from '@antfu/eslint-config'
+import { configs as packageJsonConfigs } from 'eslint-plugin-package-json'
 
 export default antfu(
   {
@@ -7,5 +8,19 @@ export default antfu(
     typescript: true,
     jsonc: true,
     yaml: true,
+  },
+  {
+    ...packageJsonConfigs.recommended,
+    name: 'package-json/recommended',
+  },
+  {
+    ...packageJsonConfigs.stylistic,
+    name: 'package-json/stylistic',
+  },
+  {
+    files: ['**/package.json'],
+    rules: {
+      'jsonc/sort-keys': 'off',
+    },
   },
 )
