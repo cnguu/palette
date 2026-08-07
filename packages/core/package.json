@@ -30,7 +30,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./package.json": "./package.json"
+    "./less/*": "./dist/*.less",
+    "./package.json": "./package.json",
+    "./sass/*": "./dist/*.scss",
+    "./stylus/*": "./dist/*.styl"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
