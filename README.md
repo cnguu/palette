@@ -40,6 +40,47 @@ console.log(ANT_VOLCANO_5) // '#fa541c'
 console.log(ANT_RED_0) // '#fff1f0'
 ```
 
+### 导出预处理器变量
+
+构建产物 `dist/` 下按设计规范生成 Less / Sass / Stylus 变量文件，通过子路径 `@cnguu/palette/{less|sass|stylus}/{design}` 引入。
+
+**Less**
+
+```less
+@import (reference) '@cnguu/palette/less/ant';
+
+.btn-primary {
+  background-color: @ant-blue-5;
+  &:hover {
+    background-color: @ant-blue-4;
+  }
+}
+```
+
+**Sass**
+
+```scss
+@import '@cnguu/palette/sass/ant';
+
+.btn-primary {
+  background-color: $ant-blue-5;
+  &:hover {
+    background-color: $ant-blue-4;
+  }
+}
+```
+
+**Stylus**
+
+```styl
+@import '@cnguu/palette/stylus/ant'
+
+.btn-primary
+  background-color ant-blue-5
+  &:hover
+    background-color ant-blue-4
+```
+
 完整的色阶导出：
 
 | 色板 | 单独色阶 | 主色 | 数组 |
