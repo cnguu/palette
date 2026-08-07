@@ -2,20 +2,45 @@
   "name": "@cnguu/palette",
   "type": "module",
   "version": "0.0.0",
+  "description": "多设计规范调色板",
+  "author": "cnguu",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/cnguu/palette#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnguu/palette.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/cnguu/palette/issues"
+  },
+  "keywords": [
+    "palette",
+    "design-system",
+    "ant-design",
+    "color",
+    "theme",
+    "less",
+    "sass",
+    "stylus"
+  ],
   "exports": {
     ".": {
-      "source": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch"

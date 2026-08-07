@@ -1,11 +1,16 @@
 {
   "name": "@cnguu/palette-tests",
   "type": "module",
+  "version": "0.0.0",
   "private": true,
+  "description": "Tests for @cnguu/palette",
+  "license": "Apache-2.0",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "@cnguu/palette": "workspace:*"
+    "@cnguu/palette": "workspace:*",
+    "vitest": "4.1.10"
   }
 }

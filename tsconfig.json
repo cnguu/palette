@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "esnext",
     "lib": ["ESNext"],
     "module": "esnext",
@@ -8,13 +9,18 @@
     "types": ["node"],
     "strict": true,
     "strictNullChecks": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
   "exclude": [
     "**/node_modules/**",
     "**/dist/**",
-    "**/playground/**"
+    "**/playground/**",
+    "**/tests/**"
   ]
 }

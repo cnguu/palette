@@ -3,13 +3,29 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "description": "多设计调色板",
+  "description": "多设计规范调色板",
+  "author": "cnguu",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/cnguu/palette#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnguu/palette.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cnguu/palette/issues"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
+  },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "pnpm --filter @cnguu/palette build",
     "dev": "pnpm --filter @cnguu/palette dev",
     "play": "pnpm --filter @cnguu/palette-playground dev",
     "test": "pnpm --filter @cnguu/palette-tests test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "release": "bumpp"
   },
@@ -18,6 +34,7 @@
     "@types/node": "26.1.2",
     "bumpp": "12.2.0",
     "eslint": "10.8.0",
+    "lefthook": "2.1.10",
     "tsdown": "0.22.14",
     "typescript": "6.0.3",
     "vitest": "4.1.10"
