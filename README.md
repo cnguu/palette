@@ -22,8 +22,30 @@ yarn add @cnguu/palette
 ## 使用
 
 ```ts
-import { } from '@cnguu/palette'
+import { ANT_RED, ANT_RED_0, ANT_RED_PALETTE, ANT_VOLCANO, ANT_VOLCANO_5 } from '@cnguu/palette'
+
+// 调色板（red-0 ~ red-9，共 10 个色阶，由浅到深）
+console.log(ANT_RED_PALETTE)
+// [
+//   '#fff1f0', '#ffccc7', '#ffa39e', '#ff7875', '#ff4d4f',
+//   '#f5222d', '#cf1322', '#a8071a', '#820014', '#5c0011',
+// ]
+
+// 主色
+console.log(ANT_RED) // '#f5222d'
+console.log(ANT_VOLCANO) // '#fa541c'
+console.log(ANT_VOLCANO_5) // '#fa541c'
+
+// 单独色阶（支持 tree-shaking，按需引入更小体积）
+console.log(ANT_RED_0) // '#fff1f0'
 ```
+
+完整的色阶导出：
+
+| 色板 | 单独色阶 | 主色 | 数组 |
+| --- | --- | --- | --- |
+| Red | `ANT_RED_0` ~ `ANT_RED_9` | `ANT_RED` | `ANT_RED_PALETTE` |
+| Volcano | `ANT_VOLCANO_0` ~ `ANT_VOLCANO_9` | `ANT_VOLCANO` | `ANT_VOLCANO_PALETTE` |
 
 ## 开发
 
