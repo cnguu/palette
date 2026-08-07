@@ -1,9 +1,9 @@
 import { generate } from '@ant-design/colors'
 
 /** `#2f54eb` */
-export const ANT_GEEKBBLUE: string = '#2f54eb'
+export const ANT_GEEKBLUE: string = '#2f54eb'
 
-const palette = generate(ANT_GEEKBBLUE)
+const palette = generate(ANT_GEEKBLUE)
 
 /**
  * 0: `#f0f5ff`
@@ -17,17 +17,17 @@ const palette = generate(ANT_GEEKBBLUE)
  * 8: `#061178`
  * 9: `#030852`
  */
-export const ANT_GEEKBBLUE_PALETTE = Object.freeze(palette)
+export const ANT_GEEKBLUE_PALETTE = Object.freeze(palette)
 
 export const [
-  ANT_GEEKBBLUE_0,
-  ANT_GEEKBBLUE_1,
-  ANT_GEEKBBLUE_2,
-  ANT_GEEKBBLUE_3,
-  ANT_GEEKBBLUE_4,
-  ANT_GEEKBBLUE_5,
-  ANT_GEEKBBLUE_6,
-  ANT_GEEKBBLUE_7,
-  ANT_GEEKBBLUE_8,
-  ANT_GEEKBBLUE_9,
-] = ANT_GEEKBBLUE_PALETTE
+  ANT_GEEKBLUE_0,
+  ANT_GEEKBLUE_1,
+  ANT_GEEKBLUE_2,
+  ANT_GEEKBLUE_3,
+  ANT_GEEKBLUE_4,
+  ANT_GEEKBLUE_5,
+  ANT_GEEKBLUE_6,
+  ANT_GEEKBLUE_7,
+  ANT_GEEKBLUE_8,
+  ANT_GEEKBLUE_9,
+] = ANT_GEEKBLUE_PALETTE
