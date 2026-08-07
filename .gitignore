@@ -39,8 +39,6 @@ playwright-report/
 # Build output
 dist/
 dist-ssr/
-.vitepress/cache/
-.vitepress/dist/
 
 # Dependencies
 node_modules
