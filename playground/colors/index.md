@@ -5,7 +5,7 @@
 左侧导航可查看每个色相的色板详情。下方为完整一览。
 
 <script setup lang="ts">
-import { ANT_COLOR_NAMES, ANT_COLOR_PALETTES, ANT_COLOR_LABELS } from '../palette-data.ts'
+import { ANT_COLOR_NAMES, ANT_COLOR_LABELS } from '../palette-data.ts'
 import PaletteGrid from '../.vitepress/theme/components/PaletteGrid.vue'
 </script>
 
@@ -15,7 +15,7 @@ import PaletteGrid from '../.vitepress/theme/components/PaletteGrid.vue'
       <a class="header-anchor" :href="`#${name}`" :aria-label="`Permalink to &quot;${name}&quot;`"></a>
       {{ ANT_COLOR_LABELS[name] }}
     </h3>
-    <PaletteGrid :name="name" :palette="ANT_COLOR_PALETTES[name]" :label="ANT_COLOR_LABELS[name]" />
+    <PaletteGrid :name="name" :label="ANT_COLOR_LABELS[name]" />
   </section>
 </div>
 

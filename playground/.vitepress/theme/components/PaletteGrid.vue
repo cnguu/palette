@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useData } from 'vitepress'
+import { resolvePalette, type AntColorName } from '../../../palette-data'
 
 const props = defineProps<{
-  /** 调色板数组（10 个色阶 0-9） */
-  palette: readonly string[]
-  /** 名称前缀，例如 'red' -> 'red-0' */
-  name: string
+  /** 色阶名称，例如 'red' */
+  name: AntColorName
   /** 该色阶的中文/英文名（hover 时显示） */
   label?: string
 }>()
 
+const { isDark } = useData()
+
+const palette = computed(() => resolvePalette(props.name, isDark.value))
+
 const steps = computed(() =>
-  props.palette.map((hex, index) => ({
+  palette.value.map((hex, index) => ({
     index,
     hex,
     id: `${props.name}-${index}`,
