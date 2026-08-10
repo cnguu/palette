@@ -10,6 +10,7 @@ export default defineConfig({
   title: '@cnguu/palette',
   description: '多设计规范调色板',
   base: '/palette/',
+  outDir: './.vitepress/dist/palette',
   cleanUrls: true,
   lastUpdated: true,
 
