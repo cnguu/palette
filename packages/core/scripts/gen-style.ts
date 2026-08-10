@@ -59,13 +59,12 @@ const DESIGNS: readonly DesignConfig[] = [
     stylePrefix: 'ant-',
     primaryIndex: 5,
   },
-  // ---- TDesign（示例：后续新增时参考） ----
-  // {
-  //   design: 'td',
-  //   constPrefix: 'TD',
-  //   stylePrefix: 'td-',
-  //   primaryIndex: 6,
-  // },
+  {
+    design: 'arco',
+    constPrefix: 'ARCO',
+    stylePrefix: 'arco-',
+    primaryIndex: 5,
+  },
 ]
 
 /** 当前需要生成的样式类型（后续扩展时追加即可） */
