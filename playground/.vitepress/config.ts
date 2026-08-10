@@ -9,6 +9,7 @@ const COLOR_LINKS = ANT_COLOR_NAMES.map(name => ({
 export default defineConfig({
   title: '@cnguu/palette',
   description: '多设计规范调色板',
+  base: '/palette/',
   cleanUrls: true,
   lastUpdated: true,
 
