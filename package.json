@@ -23,6 +23,7 @@
     "play": "pnpm --filter @cnguu/palette-playground dev",
     "play:build": "pnpm --filter @cnguu/palette-playground build",
     "play:preview": "pnpm --filter @cnguu/palette-playground preview",
+    "publish": "pnpm build && pnpm --filter @cnguu/palette publish --access public --no-git-checks",
     "release": "bumpp",
     "test": "pnpm --filter @cnguu/palette-tests test",
     "typecheck": "tsc --noEmit"
