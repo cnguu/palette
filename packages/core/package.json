@@ -1,6 +1,6 @@
 {
   "name": "@cnguu/palette",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "多设计规范调色板",
   "keywords": [
     "palette",
@@ -30,10 +30,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./less/*": "./dist/*.less",
-    "./package.json": "./package.json",
-    "./sass/*": "./dist/*.scss",
-    "./stylus/*": "./dist/*.styl"
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
