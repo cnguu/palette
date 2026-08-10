@@ -31,6 +31,6 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
       - name: Build and publish
-        run: pnpm publish
+        run: pnpm publish:core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
