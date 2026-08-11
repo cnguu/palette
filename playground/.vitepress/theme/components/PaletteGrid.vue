@@ -120,10 +120,6 @@ async function copyColor(step: { id: string, hex: string }): Promise<void> {
   transform: scale(0.99);
 }
 
-.palette__step--copied {
-  filter: brightness(1.08);
-}
-
 .palette__step + .palette__step {
   border-top: 1px solid rgba(0, 0, 0, 0.04);
 }
