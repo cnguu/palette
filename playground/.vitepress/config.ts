@@ -1,9 +1,14 @@
 import { defineConfig } from 'vitepress'
-import { ANT_COLOR_NAMES } from '../palette-data'
+import { ANT_COLOR_NAMES, ARCO_COLOR_NAMES } from '../palette-data'
 
-const COLOR_LINKS = ANT_COLOR_NAMES.map(name => ({
+const ANT_COLOR_LINKS = ANT_COLOR_NAMES.map(name => ({
   text: name,
   link: `/colors/${name}`,
+}))
+
+const ARCO_COLOR_LINKS = ARCO_COLOR_NAMES.map(name => ({
+  text: name,
+  link: `/arco-colors/${name}`,
 }))
 
 export default defineConfig({
@@ -26,7 +31,13 @@ export default defineConfig({
       '/colors/': [
         {
           text: 'Ant Design 色板',
-          items: COLOR_LINKS,
+          items: ANT_COLOR_LINKS,
+        },
+      ],
+      '/arco-colors/': [
+        {
+          text: 'Arco Design 色板',
+          items: ARCO_COLOR_LINKS,
         },
       ],
     },

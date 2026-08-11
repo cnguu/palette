@@ -26,6 +26,8 @@ import {
   ANT_VOLCANO_PALETTE,
   ANT_YELLOW,
   ANT_YELLOW_PALETTE,
+  ARCO_RED,
+  ARCO_RED_PALETTE,
 } from '@cnguu/palette'
 
 /** Ant Design 13 个基础色的展示名称（kebab-case 复数） */
@@ -115,4 +117,40 @@ export const ANT_COLOR_LABELS: Record<AntColorName, string> = {
   purple: '紫色 / purple',
   magenta: '洋红 / magenta',
   gray: '中性灰 / gray',
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Arco Design                                                                */
+/* -------------------------------------------------------------------------- */
+
+/** Arco Design 基础色的展示名称（kebab-case） */
+export const ARCO_COLOR_NAMES = [
+  'red',
+] as const
+
+export type ArcoColorName = (typeof ARCO_COLOR_NAMES)[number]
+
+/** 色阶到对应基础色（seed color）的映射 */
+export const ARCO_COLOR_SEEDS: Record<ArcoColorName, string> = {
+  red: ARCO_RED,
+}
+
+/** 色阶到对应调色板数组的映射 */
+export const ARCO_COLOR_PALETTES: Record<ArcoColorName, readonly string[]> = {
+  red: ARCO_RED_PALETTE,
+}
+
+/**
+ * 根据主题返回 Arco 调色板。
+ *
+ * Arco 的色阶为硬编码常量（不通过 `@ant-design/colors` 生成），
+ * 当前暗色模式直接复用亮色色板；后续接入 Arco 官方暗色色板时替换即可。
+ */
+export function resolveArcoPalette(name: ArcoColorName, _isDark: boolean): readonly string[] {
+  return ARCO_COLOR_PALETTES[name]
+}
+
+/** 中文显示名 */
+export const ARCO_COLOR_LABELS: Record<ArcoColorName, string> = {
+  red: '浪漫红 / red',
 }

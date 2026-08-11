@@ -16,6 +16,8 @@ hero:
 features:
   - title: Ant Design 色板
     details: 13 种基础色，每种色 10 阶，从最浅到最深，遵循 Ant Design 色彩体系。
+  - title: Arco Design 色板
+    details: 遵循 Arco Design 色彩体系，提供标准化色阶，每个色阶均提供单独常量与不可变 PALETTE 数组。
   - title: TypeScript 优先
     details: 完整类型推导，每个色阶都提供单独常量（如 ANT_RED_5）和不可变 PALETTE 数组。
   - title: 多平台适配
