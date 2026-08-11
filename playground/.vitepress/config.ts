@@ -11,6 +11,18 @@ const ARCO_COLOR_LINKS = ARCO_COLOR_NAMES.map(name => ({
   link: `/arco-colors/${name}`,
 }))
 
+/** 色板页共享的侧边栏分组，ant / arco 两个前缀下都展示，便于跨规范跳转 */
+const COLOR_SIDEBAR = [
+  {
+    text: 'Ant Design 色板',
+    items: ANT_COLOR_LINKS,
+  },
+  {
+    text: 'Arco Design 色板',
+    items: ARCO_COLOR_LINKS,
+  },
+]
+
 export default defineConfig({
   title: '@cnguu/palette',
   description: '多设计规范调色板',
@@ -24,22 +36,13 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '色板', link: '/colors/red' },
+      { text: 'Ant Design', link: '/colors/red' },
+      { text: 'Arco Design', link: '/arco-colors/red' },
     ],
 
     sidebar: {
-      '/colors/': [
-        {
-          text: 'Ant Design 色板',
-          items: ANT_COLOR_LINKS,
-        },
-      ],
-      '/arco-colors/': [
-        {
-          text: 'Arco Design 色板',
-          items: ARCO_COLOR_LINKS,
-        },
-      ],
+      '/colors/': COLOR_SIDEBAR,
+      '/arco-colors/': COLOR_SIDEBAR,
     },
 
     socialLinks: [
