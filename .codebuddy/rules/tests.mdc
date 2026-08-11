@@ -1,0 +1,69 @@
+---
+alwaysApply: true
+description: tests 测试规范
+---
+
+# tests 测试规范
+
+## 目录结构
+
+```
+tests/
+├── src/
+│   ├── ant/
+│   │   ├── helper.ts       # assertAntPalette 通用断言
+│   │   ├── red.test.ts
+│   │   └── ...
+│   └── arco/
+│       ├── helper.ts       # assertArcoPalette 通用断言
+│       └── red.test.ts
+├── package.json            # @cnguu/palette-tests
+└── tsconfig.json           # extends 根 tsconfig，customConditions: ["source"]
+```
+
+## 运行命令
+
+- `pnpm test` — 在根目录运行，等价于 `pnpm --filter @cnguu/palette-tests test`
+- `pnpm --filter @cnguu/palette-tests test:watch` — watch 模式
+
+## 测试框架
+
+- **Vitest**（`vitest run`）
+- 测试文件命名：`{color}.test.ts`，与源文件一一对应
+
+## 测试模板
+
+参考 [tests/src/ant/red.test.ts](mdc:tests/src/ant/red.test.ts)：
+
+```ts
+import { ANT_RED, ANT_RED_0, /* ... */, ANT_RED_PALETTE } from '@cnguu/palette'
+import { describe } from 'vitest'
+
+import { assertAntPalette } from './helper'
+
+describe('ant red palette', () => {
+  assertAntPalette(
+    ANT_RED,                              // 主色
+    [ANT_RED_0, /* ... */, ANT_RED_9],    // 10 个色阶常量
+    ANT_RED_PALETTE,                      // 调色板数组
+    ['#fff1f0', /* ... */, '#5c0011'],    // 期望色值
+  )
+})
+```
+
+## 断言函数规范
+
+参考 [tests/src/ant/helper.ts](mdc:tests/src/ant/helper.ts)，每个设计规范提供一个通用断言函数，包含以下用例：
+
+1. `has 10 steps` — 调色板长度为 10
+2. `matches {Design} spec` — 色值与期望数组完全一致
+3. `is frozen` — `Object.isFrozen(palette)` 为 true
+4. `exports each step as a constant` — 每个色阶常量与期望值一致
+5. `keeps step constants aligned with the palette` — 色阶常量与数组元素对齐
+6. `exports the primary color` — 主色等于 `expected[5]` 且等于 `steps[5]`
+
+## 注意事项
+
+- `tests/tsconfig.json` 使用 `customConditions: ["source"]`，直接引用源码而非构建产物
+- 测试通过 `workspace:*` 引用 `@cnguu/palette`
+- pre-push 钩子会自动运行 `pnpm test`（见 [lefthook.yml](mdc:lefthook.yml)）

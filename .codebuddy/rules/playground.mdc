@@ -1,0 +1,50 @@
+---
+alwaysApply: true
+description: playground 文档站点规范
+---
+
+# playground 文档站点规范
+
+## 目录结构
+
+```
+playground/
+├── index.md              # VitePress 首页（layout: home）
+├── package.json          # @cnguu/palette-playground
+├── palette-data.ts       # 色板元数据与主题解析逻辑
+├── colors/               # 色板展示 Markdown 页面
+│   ├── red.md
+│   └── ...
+└── arco-colors/          # Arco 色板展示页面
+```
+
+## 技术栈
+
+- **VitePress** 2.0.0-alpha
+- **Vue** 3.5
+- 依赖 `@cnguu/palette`（`workspace:*`）与 `@ant-design/colors`
+
+## 运行命令
+
+- `pnpm play` — 开发模式（`vitepress dev`）
+- `pnpm play:build` — 构建（`vitepress build`）
+- `pnpm play:preview` — 预览构建产物
+
+## palette-data.ts 规范
+
+参考 [playground/palette-data.ts](mdc:playground/palette-data.ts)，每个设计规范需维护：
+
+| 变量 | 说明 |
+| --- | --- |
+| `{DESIGN}_COLOR_NAMES` | 色板名称数组（kebab-case，`as const`） |
+| `{Design}ColorName` | 名称联合类型 |
+| `{DESIGN}_COLOR_SEEDS` | 名称 → 主色映射 |
+| `{DESIGN}_COLOR_PALETTES` | 名称 → 调色板数组映射 |
+| `{DESIGN}_COLOR_LABELS` | 名称 → 中文显示名映射 |
+| `resolve{Design}Palette(name, isDark)` | 根据主题返回色板，暗色模式可调用 `generate(seed, { theme: 'dark', backgroundColor })` |
+
+## 注意事项
+
+- playground 被 `tsconfig.json` 的 `exclude` 排除，不参与根级类型检查
+- lefthook 的 lint / typecheck 也排除 `playground/**`
+- 新增设计规范或色板时，需同步更新 `palette-data.ts` 的元数据映射

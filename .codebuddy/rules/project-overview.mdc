@@ -1,0 +1,69 @@
+---
+alwaysApply: true
+description: 项目全局规范 — 多设计规范调色板 monorepo
+---
+
+# 项目全局规范
+
+## 项目概述
+
+`@cnguu/palette` 是一个多设计规范调色板库，以 pnpm monorepo 组织，提供 Ant Design、Arco Design 等设计规范的标准化色阶，支持 JS/TS 常量与 Less / Sass / Stylus 变量文件导出。
+
+- **包名**：`@cnguu/palette`（核心包位于 `packages/core`）
+- **License**：Apache-2.0
+- **模块系统**：ESM + CJS 双格式
+- **Node**：>= 24.0.0
+- **pnpm**：>= 10.0.0（强制使用 pnpm，见 `preinstall` 脚本）
+
+## Monorepo 结构
+
+```
+palette/
+├── packages/core/     # 核心库 @cnguu/palette
+├── playground/        # VitePress 文档与可视化色板
+├── tests/             # Vitest 单元测试
+├── bump.config.ts     # bumpp 版本发布配置（仅更新 packages/core/package.json）
+├── eslint.config.js   # @antfu/eslint-config + package-json 插件
+├── lefthook.yml       # Git hooks：pre-commit (lint + typecheck)，pre-push (test)
+├── pnpm-workspace.yaml # workspace + catalog 版本集中管理
+└── tsconfig.json      # 根 TS 配置（composite, strict）
+```
+
+## 命名与导出约定
+
+- **常量命名**：`{DESIGN}_{COLOR}`（主色）、`{DESIGN}_{COLOR}_{N}`（单级色阶）、`{DESIGN}_{COLOR}_PALETTE`（色阶数组）
+  - Ant Design 前缀：`ANT`（如 `ANT_RED`、`ANT_RED_5`、`ANT_RED_PALETTE`）
+  - Arco Design 前缀：`ARCO`（如 `ARCO_RED`、`ARCO_RED_5`、`ARCO_RED_PALETTE`）
+- **色阶范围**：Ant Design 为 `0`–`9`（10 级），Arco Design 为 `1`–`10`（10 级）
+- **主色索引**：均为 `primaryIndex: 5`（即色阶数组第 6 个元素）
+- **冻结**：所有 `*_PALETTE` 数组必须使用 `Object.freeze()` 冻结，保证不可变
+- **样式变量前缀**：Ant Design 为 `ant-`，Arco Design 为 `arco-`（kebab-case）
+
+## 新增设计规范流程
+
+1. 在 `packages/core/src/{design}/` 下新建目录，按色板拆分文件（每色一个 `.ts`）
+2. 创建 `packages/core/src/{design}/index.ts`，按字母序 `export * from './xxx'`
+3. 在 `packages/core/src/index.ts` 中追加 `export * from './{design}'`
+4. 在 [packages/core/scripts/gen-style.ts](mdc:packages/core/scripts/gen-style.ts) 的 `DESIGNS` 数组追加配置项：
+   ```ts
+   { design: '{name}', constPrefix: '{PREFIX}', stylePrefix: '{prefix}-', primaryIndex: 5 }
+   ```
+5. 在 `tests/src/{design}/` 下创建对应测试，编写 `helper.ts` 断言函数
+6. 在 [playground/palette-data.ts](mdc:playground/palette-data.ts) 中注册色板元数据
+
+## 新增色板流程
+
+1. 在对应设计规范目录下新建 `{color}.ts`，导出主色、`_PALETTE` 数组及各级色阶常量
+2. 在 `index.ts` 中按字母序追加导出
+3. 在 `tests/src/{design}/` 下新建 `{color}.test.ts`
+4. 如需在 playground 展示，更新 [playground/palette-data.ts](mdc:playground/palette-data.ts) 的 `*_COLOR_NAMES`、`*_COLOR_SEEDS`、`*_COLOR_PALETTES`、`*_COLOR_LABELS`
+
+## 代码风格
+
+- **ESLint**：使用 `@antfu/eslint-config`，`type: 'lib'`，启用 stylistic / typescript / jsonc / yaml
+- **缩进**：2 空格
+- **引号**：单引号
+- **分号**：无分号（`@antfu` 默认）
+- **导入排序**：由 ESLint 自动维护
+- **注释**：色值使用 `/** #xxxxxx */` JSDoc 注释；色阶列表使用多行注释标注每级色值
+- **文件头**：源文件中用 `/* -------- 分节标题 -------- */` 进行逻辑分节（见 gen-style.ts）

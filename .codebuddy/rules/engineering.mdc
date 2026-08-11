@@ -1,0 +1,67 @@
+---
+alwaysApply: true
+description: 工程配置规范 — ESLint / TypeScript / Lefthook / 依赖管理 / 发布
+---
+
+# 工程配置规范
+
+## ESLint
+
+参考 [eslint.config.js](mdc:eslint.config.js)：
+
+- 基于 `@antfu/eslint-config`，`type: 'lib'`
+- 启用：`stylistic`、`typescript`、`jsonc`、`yaml`
+- 集成 `eslint-plugin-package-json`（recommended + stylistic）
+- `**/package.json` 中关闭 `jsonc/sort-keys`（保持自定义字段顺序）
+- 运行：`pnpm lint` / `pnpm lint:fix`
+
+## TypeScript
+
+参考 [tsconfig.json](mdc:tsconfig.json)：
+
+- `composite: true`，`strict: true`，`strictNullChecks: true`
+- `target` / `module` / `moduleResolution`：`esnext` / `bundler`
+- `declaration` + `declarationMap` + `sourceMap`：开启
+- `allowImportingTsExtensions`：开启
+- `exclude`：`node_modules`、`dist`、`playground`、`tests`
+- 运行：`pnpm typecheck`（`tsc --noEmit`）
+
+## Lefthook Git Hooks
+
+参考 [lefthook.yml](mdc:lefthook.yml)：
+
+| Hook | Job | 作用域 | 命令 |
+| --- | --- | --- | --- |
+| pre-commit | lint | `*.{js,ts,tsx,mjs,cjs}`（排除 node_modules / dist / playground） | `pnpm eslint --fix -- {staged_files} && git add` |
+| pre-commit | typecheck | `*.{ts,tsx}`（同上排除） | `pnpm typecheck` |
+| pre-push | test | 全局 | `pnpm test` |
+
+## 依赖管理（pnpm catalog）
+
+所有共享依赖版本集中在 [pnpm-workspace.yaml](mdc:pnpm-workspace.yaml) 的 `catalog` 字段，子包通过 `"catalog:"` 引用。
+
+当前 catalog 关键版本：
+
+- `@antfu/eslint-config`: 9.3.0
+- `typescript`: 6.0.3
+- `eslint`: 10.8.0
+- `tsdown`: 0.22.14
+- `vitest`: 4.1.10
+- `vite`: 8.2.1
+- `vitepress`: 2.0.0-alpha.19
+- `vue`: 3.5.13
+- `@ant-design/colors`: 8.0.1
+
+新增共享依赖时，优先添加到 catalog，子包用 `"catalog:"` 引用；仅单个包使用的依赖可直接写入子包 `devDependencies`。
+
+## 发布流程
+
+- **版本工具**：bumpp（见 [bump.config.ts](mdc:bump.config.ts)），仅更新 `packages/core/package.json`
+- **发布命令**：`pnpm release`（交互式 bumpp）→ `pnpm publish:core`（构建 + 发布）
+- `publish:core` 会先执行 `pnpm build`，再 `pnpm --filter @cnguu/palette publish --access public --no-git-checks`
+
+## 环境要求
+
+- Node.js >= 24.0.0
+- pnpm >= 10.0.0
+- 强制使用 pnpm（`preinstall: npx only-allow pnpm`）

@@ -1,0 +1,102 @@
+---
+alwaysApply: true
+description: packages/core 核心库开发规范
+---
+
+# packages/core 核心库规范
+
+## 目录结构
+
+```
+packages/core/
+├── src/
+│   ├── index.ts          # 顶层入口，export * from 各设计规范
+│   ├── ant/              # Ant Design 色板（13 种基础色）
+│   │   ├── index.ts      # 按字母序聚合导出
+│   │   ├── blue.ts
+│   │   ├── red.ts
+│   │   └── ...
+│   └── arco/             # Arco Design 色板
+│       ├── index.ts
+│       ├── red.ts
+│       └── ...
+├── scripts/
+│   └── gen-style.ts      # 构建后生成 Less/Sass/Stylus 变量文件
+├── tsdown.config.ts       # 构建配置
+├── package.json
+└── dist/                  # 构建产物（gitignore）
+```
+
+## 色板源文件模板（Ant Design）
+
+参考 [packages/core/src/ant/red.ts](mdc:packages/core/src/ant/red.ts)：
+
+```ts
+import { generate } from '@ant-design/colors'
+
+/** `#f5222d` */
+export const ANT_RED: string = '#f5222d'
+
+const palette = generate(ANT_RED)
+
+/**
+ * 0: `#fff1f0`
+ * 1: `#ffccc7`
+ * ...
+ * 9: `#5c0011`
+ */
+export const ANT_RED_PALETTE = Object.freeze(palette)
+
+export const [
+  ANT_RED_0,
+  ANT_RED_1,
+  // ...
+  ANT_RED_9,
+] = ANT_RED_PALETTE
+```
+
+## 色板源文件模板（Arco Design）
+
+Arco 色阶为硬编码常量（不通过 `@ant-design/colors` 生成），参考 [packages/core/src/arco/red.ts](mdc:packages/core/src/arco/red.ts)：
+
+```ts
+/** `#f53f3f` */
+export const ARCO_RED: string = '#f53f3f'
+
+/**
+ * 0: `#ffece8`
+ * ...
+ * 9: `#4d000a`
+ */
+export const ARCO_RED_PALETTE: readonly string[] = Object.freeze([
+  '#ffece8',
+  // ...
+  '#4d000a',
+])
+
+export const [
+  ARCO_RED_1,
+  // ...
+  ARCO_RED_10,
+] = ARCO_RED_PALETTE
+```
+
+## 构建配置
+
+- **工具**：tsdown（见 [packages/core/tsdown.config.ts](mdc:packages/core/tsdown.config.ts)）
+- **入口**：`src/index.ts`
+- **格式**：ESM + CJS
+- **DTS**：开启
+- **Target**：esnext
+- **Platform**：neutral
+- **构建后钩子**：`onSuccess` 调用 `genStyleFiles()`，从 `dist/index.js` 动态 import 扫描 `*_PALETTE` 导出，按 `DESIGNS × STYLE_TYPES` 生成样式文件
+  - 输出到 `dist/{design}.{less|scss|styl}`
+  - 变量格式：Less `@name: value;` / Sass `$name: value;` / Stylus `name = value`
+
+## package.json 约定
+
+- `"sideEffects": false` — 支持 tree-shaking
+- `"type": "module"`
+- `exports` 字段需同时声明 `import`（ESM）与 `require`（CJS）
+- `files` 字段包含 `dist` 与 `src`
+- 依赖版本统一使用 `catalog:` 引用，集中管理于根 `pnpm-workspace.yaml`
