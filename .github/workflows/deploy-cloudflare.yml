@@ -29,6 +29,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        env:
+          NPM_CONFIG_ALLOW_ROOT: true
 
       - name: Build project
         run: pnpm build && pnpm play:build
