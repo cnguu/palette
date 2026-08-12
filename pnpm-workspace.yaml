@@ -1,3 +1,7 @@
+minimumReleaseAgeExclude:
+  - miniflare@5.20260804.1-alpha
+  - wrangler@4.121.0
+
 shellEmulator: true
 
 trustPolicy: no-downgrade
@@ -21,9 +25,12 @@ catalog:
   vitepress: 2.0.0-alpha.19
   vitest: 4.1.10
   vue: 3.5.13
+  wrangler: 4.121.0
 
 onlyBuiltDependencies:
   - lefthook
 
 allowBuilds:
+  esbuild: true
   lefthook: true
+  workerd: true
