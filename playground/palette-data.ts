@@ -26,8 +26,34 @@ import {
   ANT_VOLCANO_PALETTE,
   ANT_YELLOW,
   ANT_YELLOW_PALETTE,
+  ARCO_ARCOBLUE,
+  ARCO_ARCOBLUE_PALETTE,
+  ARCO_BLUE,
+  ARCO_BLUE_PALETTE,
+  ARCO_CYAN,
+  ARCO_CYAN_PALETTE,
+  ARCO_GOLD,
+  ARCO_GOLD_PALETTE,
+  ARCO_GRAY,
+  ARCO_GRAY_PALETTE,
+  ARCO_GREEN,
+  ARCO_GREEN_PALETTE,
+  ARCO_LIME,
+  ARCO_LIME_PALETTE,
+  ARCO_MAGENTA,
+  ARCO_MAGENTA_PALETTE,
+  ARCO_ORANGE,
+  ARCO_ORANGE_PALETTE,
+  ARCO_ORANGERED,
+  ARCO_ORANGERED_PALETTE,
+  ARCO_PINKPURPLE,
+  ARCO_PINKPURPLE_PALETTE,
+  ARCO_PURPLE,
+  ARCO_PURPLE_PALETTE,
   ARCO_RED,
   ARCO_RED_PALETTE,
+  ARCO_YELLOW,
+  ARCO_YELLOW_PALETTE,
 } from '@cnguu/palette'
 
 /** Ant Design 13 个基础色的展示名称（kebab-case 复数） */
@@ -126,6 +152,19 @@ export const ANT_COLOR_LABELS: Record<AntColorName, string> = {
 /** Arco Design 基础色的展示名称（kebab-case） */
 export const ARCO_COLOR_NAMES = [
   'red',
+  'orangered',
+  'orange',
+  'gold',
+  'yellow',
+  'lime',
+  'green',
+  'cyan',
+  'blue',
+  'arcoblue',
+  'purple',
+  'pinkpurple',
+  'magenta',
+  'gray',
 ] as const
 
 export type ArcoColorName = (typeof ARCO_COLOR_NAMES)[number]
@@ -133,11 +172,37 @@ export type ArcoColorName = (typeof ARCO_COLOR_NAMES)[number]
 /** 色阶到对应基础色（seed color）的映射 */
 export const ARCO_COLOR_SEEDS: Record<ArcoColorName, string> = {
   red: ARCO_RED,
+  orangered: ARCO_ORANGERED,
+  orange: ARCO_ORANGE,
+  gold: ARCO_GOLD,
+  yellow: ARCO_YELLOW,
+  lime: ARCO_LIME,
+  green: ARCO_GREEN,
+  cyan: ARCO_CYAN,
+  blue: ARCO_BLUE,
+  arcoblue: ARCO_ARCOBLUE,
+  purple: ARCO_PURPLE,
+  pinkpurple: ARCO_PINKPURPLE,
+  magenta: ARCO_MAGENTA,
+  gray: ARCO_GRAY,
 }
 
 /** 色阶到对应调色板数组的映射 */
 export const ARCO_COLOR_PALETTES: Record<ArcoColorName, readonly string[]> = {
   red: ARCO_RED_PALETTE,
+  orangered: ARCO_ORANGERED_PALETTE,
+  orange: ARCO_ORANGE_PALETTE,
+  gold: ARCO_GOLD_PALETTE,
+  yellow: ARCO_YELLOW_PALETTE,
+  lime: ARCO_LIME_PALETTE,
+  green: ARCO_GREEN_PALETTE,
+  cyan: ARCO_CYAN_PALETTE,
+  blue: ARCO_BLUE_PALETTE,
+  arcoblue: ARCO_ARCOBLUE_PALETTE,
+  purple: ARCO_PURPLE_PALETTE,
+  pinkpurple: ARCO_PINKPURPLE_PALETTE,
+  magenta: ARCO_MAGENTA_PALETTE,
+  gray: ARCO_GRAY_PALETTE,
 }
 
 /**
@@ -153,4 +218,17 @@ export function resolveArcoPalette(name: ArcoColorName, _isDark: boolean): reado
 /** 中文显示名 */
 export const ARCO_COLOR_LABELS: Record<ArcoColorName, string> = {
   red: '浪漫红 / red',
+  orangered: '晚秋红 / orangered',
+  orange: '活力橙 / orange',
+  gold: '黄昏 / gold',
+  yellow: '柠檬黄 / yellow',
+  lime: '新生绿 / lime',
+  green: '仙野绿 / green',
+  cyan: '碧涛青 / cyan',
+  blue: '海蔚蓝 / blue',
+  arcoblue: '极致蓝 / arcoblue',
+  purple: '暗夜紫 / purple',
+  pinkpurple: '青春紫 / pinkpurple',
+  magenta: '品红 / magenta',
+  gray: '中性灰 / gray',
 }
