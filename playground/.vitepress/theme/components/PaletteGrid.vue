@@ -3,16 +3,18 @@ import { computed, ref } from 'vue'
 import { useData } from 'vitepress'
 import {
   resolveArcoPalette,
+  resolveElPalette,
   resolvePalette,
   type AntColorName,
   type ArcoColorName,
+  type ElColorName,
 } from '../../../palette-data'
 
-type ColorName = AntColorName | ArcoColorName
+type ColorName = AntColorName | ArcoColorName | ElColorName
 
 const props = withDefaults(defineProps<{
   /** 设计规范，默认 'ant' */
-  design?: 'ant' | 'arco'
+  design?: 'ant' | 'arco' | 'el'
   /** 色阶名称，例如 'red' */
   name: ColorName
   /** 该色阶的中文/英文名 */
@@ -26,6 +28,9 @@ const { isDark } = useData()
 const palette = computed(() => {
   if (props.design === 'arco') {
     return resolveArcoPalette(props.name as ArcoColorName, isDark.value)
+  }
+  if (props.design === 'el') {
+    return resolveElPalette(props.name as ElColorName, isDark.value)
   }
   return resolvePalette(props.name as AntColorName, isDark.value)
 })

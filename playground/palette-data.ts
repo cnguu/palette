@@ -84,6 +84,18 @@ import {
   ARCO_YELLOW_PALETTE,
   EL_DANGER,
   EL_DANGER_PALETTE,
+  EL_DARK_DANGER,
+  EL_DARK_DANGER_PALETTE,
+  EL_DARK_ERROR,
+  EL_DARK_ERROR_PALETTE,
+  EL_DARK_INFO,
+  EL_DARK_INFO_PALETTE,
+  EL_DARK_PRIMARY,
+  EL_DARK_PRIMARY_PALETTE,
+  EL_DARK_SUCCESS,
+  EL_DARK_SUCCESS_PALETTE,
+  EL_DARK_WARNING,
+  EL_DARK_WARNING_PALETTE,
   EL_ERROR,
   EL_ERROR_PALETTE,
   EL_INFO,
@@ -94,7 +106,6 @@ import {
   EL_SUCCESS_PALETTE,
   EL_WARNING,
   EL_WARNING_PALETTE,
-  generateEl,
 } from '@cnguu/palette'
 
 /** Ant Design 13 个基础色的展示名称（kebab-case 复数） */
@@ -351,18 +362,38 @@ export const EL_COLOR_PALETTES: Record<ElColorName, readonly string[]> = {
   info: EL_INFO_PALETTE,
 }
 
+/** Element Plus 暗黑色板映射（亮色↔暗色版一一对应） */
+export const EL_DARK_COLOR_PALETTES: Record<ElColorName, readonly string[]> = {
+  primary: EL_DARK_PRIMARY_PALETTE,
+  success: EL_DARK_SUCCESS_PALETTE,
+  warning: EL_DARK_WARNING_PALETTE,
+  danger: EL_DARK_DANGER_PALETTE,
+  error: EL_DARK_ERROR_PALETTE,
+  info: EL_DARK_INFO_PALETTE,
+}
+
+/** Element Plus 暗黑色板主色映射 */
+export const EL_DARK_COLOR_SEEDS: Record<ElColorName, string> = {
+  primary: EL_DARK_PRIMARY,
+  success: EL_DARK_SUCCESS,
+  warning: EL_DARK_WARNING,
+  danger: EL_DARK_DANGER,
+  error: EL_DARK_ERROR,
+  info: EL_DARK_INFO,
+}
+
 /**
  * 根据主题返回 Element Plus 调色板。
  *
- * - 暗色模式：使用 Element Plus 风格的 `generate`（theme: dark），
- *   以 VitePress 夜间背景色为底，保证暗色文档背景上的可读性。
+ * - 暗色模式：返回构建时预生成的 `EL_DARK_*_PALETTE`（由 `generateEl` 以
+ *   `mode: 'dark'` 生成，背景色为 `#141414`）。
  * - 亮色模式：返回构建时预生成的 `EL_*_PALETTE`。
  */
 export function resolveElPalette(name: ElColorName, isDark: boolean): readonly string[] {
   if (!isDark) {
     return EL_COLOR_PALETTES[name]
   }
-  return generateEl(EL_COLOR_SEEDS[name], { mode: 'dark', backgroundColor: VP_DARK_BG })
+  return EL_DARK_COLOR_PALETTES[name]
 }
 
 /** 中文显示名 */

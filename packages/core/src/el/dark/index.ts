@@ -1,7 +1,5 @@
 export * from './danger'
-export * from './dark'
 export * from './error'
-export * from './generate'
 export * from './info'
 export * from './primary'
 export * from './success'
