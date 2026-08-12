@@ -41,3 +41,4 @@ jobs:
           command: pages deploy ./playground/.vitepress/dist --project-name=palette
           packageManager: pnpm
           wranglerVersion: 4
+          workingDirectory: playground
