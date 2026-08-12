@@ -17,7 +17,6 @@
   "devDependencies": {
     "vite": "catalog:",
     "vitepress": "catalog:",
-    "vue": "catalog:",
-    "wrangler": "catalog:"
+    "vue": "catalog:"
   }
 }
