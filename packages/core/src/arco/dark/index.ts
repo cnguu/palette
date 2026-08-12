@@ -1,7 +1,6 @@
 export * from './arcoblue'
 export * from './blue'
 export * from './cyan'
-export * from './dark'
 export * from './gold'
 export * from './gray'
 export * from './green'

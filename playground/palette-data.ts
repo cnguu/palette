@@ -32,6 +32,34 @@ import {
   ARCO_BLUE_PALETTE,
   ARCO_CYAN,
   ARCO_CYAN_PALETTE,
+  ARCO_DARK_ARCOBLUE,
+  ARCO_DARK_ARCOBLUE_PALETTE,
+  ARCO_DARK_BLUE,
+  ARCO_DARK_BLUE_PALETTE,
+  ARCO_DARK_CYAN,
+  ARCO_DARK_CYAN_PALETTE,
+  ARCO_DARK_GOLD,
+  ARCO_DARK_GOLD_PALETTE,
+  ARCO_DARK_GRAY,
+  ARCO_DARK_GRAY_PALETTE,
+  ARCO_DARK_GREEN,
+  ARCO_DARK_GREEN_PALETTE,
+  ARCO_DARK_LIME,
+  ARCO_DARK_LIME_PALETTE,
+  ARCO_DARK_MAGENTA,
+  ARCO_DARK_MAGENTA_PALETTE,
+  ARCO_DARK_ORANGE,
+  ARCO_DARK_ORANGE_PALETTE,
+  ARCO_DARK_ORANGERED,
+  ARCO_DARK_ORANGERED_PALETTE,
+  ARCO_DARK_PINKPURPLE,
+  ARCO_DARK_PINKPURPLE_PALETTE,
+  ARCO_DARK_PURPLE,
+  ARCO_DARK_PURPLE_PALETTE,
+  ARCO_DARK_RED,
+  ARCO_DARK_RED_PALETTE,
+  ARCO_DARK_YELLOW,
+  ARCO_DARK_YELLOW_PALETTE,
   ARCO_GOLD,
   ARCO_GOLD_PALETTE,
   ARCO_GRAY,
@@ -205,14 +233,55 @@ export const ARCO_COLOR_PALETTES: Record<ArcoColorName, readonly string[]> = {
   gray: ARCO_GRAY_PALETTE,
 }
 
+/** Arco Design 暗黑色板映射（亮色↔暗色版一一对应） */
+export const ARCO_DARK_COLOR_PALETTES: Record<ArcoColorName, readonly string[]> = {
+  red: ARCO_DARK_RED_PALETTE,
+  orangered: ARCO_DARK_ORANGERED_PALETTE,
+  orange: ARCO_DARK_ORANGE_PALETTE,
+  gold: ARCO_DARK_GOLD_PALETTE,
+  yellow: ARCO_DARK_YELLOW_PALETTE,
+  lime: ARCO_DARK_LIME_PALETTE,
+  green: ARCO_DARK_GREEN_PALETTE,
+  cyan: ARCO_DARK_CYAN_PALETTE,
+  blue: ARCO_DARK_BLUE_PALETTE,
+  arcoblue: ARCO_DARK_ARCOBLUE_PALETTE,
+  purple: ARCO_DARK_PURPLE_PALETTE,
+  pinkpurple: ARCO_DARK_PINKPURPLE_PALETTE,
+  magenta: ARCO_DARK_MAGENTA_PALETTE,
+  gray: ARCO_DARK_GRAY_PALETTE,
+}
+
+/** Arco Design 暗黑色板主色映射 */
+export const ARCO_DARK_COLOR_SEEDS: Record<ArcoColorName, string> = {
+  red: ARCO_DARK_RED,
+  orangered: ARCO_DARK_ORANGERED,
+  orange: ARCO_DARK_ORANGE,
+  gold: ARCO_DARK_GOLD,
+  yellow: ARCO_DARK_YELLOW,
+  lime: ARCO_DARK_LIME,
+  green: ARCO_DARK_GREEN,
+  cyan: ARCO_DARK_CYAN,
+  blue: ARCO_DARK_BLUE,
+  arcoblue: ARCO_DARK_ARCOBLUE,
+  purple: ARCO_DARK_PURPLE,
+  pinkpurple: ARCO_DARK_PINKPURPLE,
+  magenta: ARCO_DARK_MAGENTA,
+  gray: ARCO_DARK_GRAY,
+}
+
 /**
- * 根据主题返回 Arco 调色板。
+ * 根据主题返回 Arco 调色板：
+ * - 暗色模式：使用 Arco Design 官方预定义深色板（`ARCO_DARK_*`）；
+ * - 亮色模式：返回构建时生成的 `ARCO_*_PALETTE`。
  *
- * Arco 的色阶为硬编码常量（不通过 `@ant-design/colors` 生成），
- * 当前暗色模式直接复用亮色色板；后续接入 Arco 官方暗色色板时替换即可。
+ * 与 Ant Design 不同，Arco 的色阶在构建产物中以 `ARCO_DARK_*_PALETTE` 形式
+ * 静态提供，因此 `resolveArcoPalette` 不再调用 `@ant-design/colors` 动态生成。
  */
-export function resolveArcoPalette(name: ArcoColorName, _isDark: boolean): readonly string[] {
-  return ARCO_COLOR_PALETTES[name]
+export function resolveArcoPalette(name: ArcoColorName, isDark: boolean): readonly string[] {
+  if (!isDark) {
+    return ARCO_COLOR_PALETTES[name]
+  }
+  return ARCO_DARK_COLOR_PALETTES[name]
 }
 
 /** 中文显示名 */
