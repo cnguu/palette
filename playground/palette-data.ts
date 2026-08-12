@@ -1,4 +1,4 @@
-import { generate } from '@ant-design/colors'
+import { generate as generateAnt } from '@ant-design/colors'
 import {
   ANT_BLUE,
   ANT_BLUE_PALETTE,
@@ -82,6 +82,19 @@ import {
   ARCO_RED_PALETTE,
   ARCO_YELLOW,
   ARCO_YELLOW_PALETTE,
+  EL_DANGER,
+  EL_DANGER_PALETTE,
+  EL_ERROR,
+  EL_ERROR_PALETTE,
+  EL_INFO,
+  EL_INFO_PALETTE,
+  EL_PRIMARY,
+  EL_PRIMARY_PALETTE,
+  EL_SUCCESS,
+  EL_SUCCESS_PALETTE,
+  EL_WARNING,
+  EL_WARNING_PALETTE,
+  generateEl,
 } from '@cnguu/palette'
 
 /** Ant Design 13 个基础色的展示名称（kebab-case 复数） */
@@ -153,7 +166,7 @@ export function resolvePalette(name: AntColorName, isDark: boolean): readonly st
   if (!isDark) {
     return ANT_COLOR_PALETTES[name]
   }
-  return generate(ANT_COLOR_SEEDS[name], { theme: 'dark', backgroundColor: VP_DARK_BG })
+  return generateAnt(ANT_COLOR_SEEDS[name], { theme: 'dark', backgroundColor: VP_DARK_BG })
 }
 
 /** 中文显示名 */
@@ -300,4 +313,64 @@ export const ARCO_COLOR_LABELS: Record<ArcoColorName, string> = {
   pinkpurple: '青春紫 / pinkpurple',
   magenta: '品红 / magenta',
   gray: '中性灰 / gray',
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Element Plus                                                               */
+/* -------------------------------------------------------------------------- */
+
+/** Element Plus 基础色的展示名称（kebab-case，顺序与官方 $types 一致） */
+export const EL_COLOR_NAMES = [
+  'primary',
+  'success',
+  'warning',
+  'danger',
+  'error',
+  'info',
+] as const
+
+export type ElColorName = (typeof EL_COLOR_NAMES)[number]
+
+/** 色阶到对应基础色（seed color）的映射 */
+export const EL_COLOR_SEEDS: Record<ElColorName, string> = {
+  primary: EL_PRIMARY,
+  success: EL_SUCCESS,
+  warning: EL_WARNING,
+  danger: EL_DANGER,
+  error: EL_ERROR,
+  info: EL_INFO,
+}
+
+/** 色阶到对应调色板数组的映射（亮色模式） */
+export const EL_COLOR_PALETTES: Record<ElColorName, readonly string[]> = {
+  primary: EL_PRIMARY_PALETTE,
+  success: EL_SUCCESS_PALETTE,
+  warning: EL_WARNING_PALETTE,
+  danger: EL_DANGER_PALETTE,
+  error: EL_ERROR_PALETTE,
+  info: EL_INFO_PALETTE,
+}
+
+/**
+ * 根据主题返回 Element Plus 调色板。
+ *
+ * - 暗色模式：使用 Element Plus 风格的 `generate`（theme: dark），
+ *   以 VitePress 夜间背景色为底，保证暗色文档背景上的可读性。
+ * - 亮色模式：返回构建时预生成的 `EL_*_PALETTE`。
+ */
+export function resolveElPalette(name: ElColorName, isDark: boolean): readonly string[] {
+  if (!isDark) {
+    return EL_COLOR_PALETTES[name]
+  }
+  return generateEl(EL_COLOR_SEEDS[name], { mode: 'dark', backgroundColor: VP_DARK_BG })
+}
+
+/** 中文显示名 */
+export const EL_COLOR_LABELS: Record<ElColorName, string> = {
+  primary: '主色 / primary',
+  success: '成功 / success',
+  warning: '警告 / warning',
+  danger: '危险 / danger',
+  error: '错误 / error',
+  info: '信息 / info',
 }

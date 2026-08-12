@@ -65,6 +65,12 @@ const DESIGNS: readonly DesignConfig[] = [
     stylePrefix: 'arco-',
     primaryIndex: 5,
   },
+  {
+    design: 'el',
+    constPrefix: 'EL',
+    stylePrefix: 'el-',
+    primaryIndex: 9,
+  },
 ]
 
 /** 当前需要生成的样式类型（后续扩展时追加即可） */
