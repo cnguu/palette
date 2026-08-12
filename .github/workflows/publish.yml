@@ -18,15 +18,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup pnpm & Node.js
-        uses: pnpm/setup@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
         with:
-          version: 11.21.0
-          runtime: node@24.19.0
-          cache: true
-          install: false
+          version: 10.33.0
+          run_install: false
 
-      - name: Install dependencies
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.14.1
+          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+
+      - name: Install deps
         run: pnpm install --frozen-lockfile
 
       - name: Build and publish
