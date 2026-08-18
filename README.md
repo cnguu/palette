@@ -2,129 +2,71 @@
 
 > 多设计规范调色板
 
+统一管理 Ant Design、Arco Design、Element Plus 等设计规范的色阶常量与预处理器变量，支持 JS/TS、Less、Sass、Stylus 多格式导出。
+
 ## 特性
 
-- **多设计规范支持** - 目前提供 Ant Design 设计规范，后续将持续扩展
-- **多格式导出** - 支持导出源文件和 JS/TS 配置文件、Less/CSS/Sass/Stylus 变量
-- **TypeScript 原生支持** - 完整的类型定义
-- **Tree-shaking 友好** - 支持 ESM 和 CJS 双格式
+- **多设计规范** - 内置 Ant Design、Arco Design、Element Plus 三套色板，持续扩展
+- **亮暗双模式** - Arco Design 与 Element Plus 额外提供暗色变体
+- **多格式导出** - JS/TS 常量 + Less / Sass / Stylus 变量文件
+- **TypeScript 原生支持** - 完整类型定义，`strict` 模式通过
+- **Tree-shaking 友好** - ESM + CJS 双格式，`sideEffects: false`
+- **不可变色板** - 所有 `*_PALETTE` 数组经 `Object.freeze` 冻结
 
-## 安装
+## 设计规范
 
-```bash
-pnpm add @cnguu/palette
-# or
-npm add @cnguu/palette
-# or
-yarn add @cnguu/palette
-```
+| 设计规范 | 常量前缀 | 样式前缀 | 色阶范围 | 主色索引 | 暗色变体 |
+| --- | --- | --- | --- | --- | --- |
+| Ant Design | `ANT` | `ant-` | `0` – `9`（10 级） | `5` | - |
+| Arco Design | `ARCO` | `arco-` | `1` – `10`（10 级） | `5` | `ARCO_DARK_*` |
+| Element Plus | `EL` | `el-` | `0` – `10`（11 级） | `9` | `EL_DARK_*` |
 
-## 使用
+### 命名约定
 
-```ts
-import { ANT_RED, ANT_RED_0, ANT_RED_PALETTE, ANT_VOLCANO, ANT_VOLCANO_5 } from '@cnguu/palette'
+- 主色：`{PREFIX}_{COLOR}`
+- 单级色阶：`{PREFIX}_{COLOR}_{N}`
+- 色阶数组：`{PREFIX}_{COLOR}_PALETTE`
+- 暗色变体：`{PREFIX}_DARK_{COLOR}` / `{PREFIX}_DARK_{COLOR}_{N}` / `{PREFIX}_DARK_{COLOR}_PALETTE`
 
-// 调色板（red-0 ~ red-9，共 10 个色阶，由浅到深）
-console.log(ANT_RED_PALETTE)
-// [
-//   '#fff1f0', '#ffccc7', '#ffa39e', '#ff7875', '#ff4d4f',
-//   '#f5222d', '#cf1322', '#a8071a', '#820014', '#5c0011',
-// ]
+### 色板清单
 
-// 主色
-console.log(ANT_RED) // '#f5222d'
-console.log(ANT_VOLCANO) // '#fa541c'
-console.log(ANT_VOLCANO_5) // '#fa541c'
+**Ant Design**（13 种）：Blue、Cyan、Geekblue、Gold、Gray、Green、Lime、Magenta、Orange、Purple、Red、Volcano、Yellow
 
-// 单独色阶（支持 tree-shaking，按需引入更小体积）
-console.log(ANT_RED_0) // '#fff1f0'
-```
+**Arco Design**（15 种）：Arcoblue、Blue、Cyan、Gold、Gray、Green、Lime、Magenta、Orange、Orangered、Pinkpurple、Purple、Red、Yellow，暗色变体同名
 
-### 导出预处理器变量
+**Element Plus**（7 种语义色）：Primary、Success、Warning、Info、Danger、Error、Dark，暗色变体除 Dark 外同名
 
-构建产物 `dist/` 下按设计规范生成 Less / Sass / Stylus 变量文件，通过子路径 `@cnguu/palette/{less|sass|stylus}/{design}` 引入。
+## 导出格式
 
-**Less**
+### JS/TS 常量
 
-```less
-@import (reference) '@cnguu/palette/less/ant';
+通过主入口 `@cnguu/palette` 导出，按设计规范 + 色板拆分，支持按需引入。
 
-.btn-primary {
-  background-color: @ant-blue-5;
-  &:hover {
-    background-color: @ant-blue-4;
-  }
-}
-```
+### 预处理器变量
 
-**Sass**
+构建产物 `dist/` 下按设计规范生成扁平结构的变量文件，文件名为 `{design}.{ext}`：
 
-```scss
-@import '@cnguu/palette/sass/ant';
+| 格式 | 扩展名 | 文件 |
+| --- | --- | --- |
+| Less | `.less` | `dist/ant.less`、`dist/arco.less`、`dist/el.less` |
+| Sass | `.scss` | `dist/ant.scss`、`dist/arco.scss`、`dist/el.scss` |
+| Stylus | `.styl` | `dist/ant.styl`、`dist/arco.styl`、`dist/el.styl` |
 
-.btn-primary {
-  background-color: $ant-blue-5;
-  &:hover {
-    background-color: $ant-blue-4;
-  }
-}
-```
+通过包内 `dist/` 路径引入，如 `@cnguu/palette/dist/ant.less`。
 
-**Stylus**
-
-```styl
-@import '@cnguu/palette/stylus/ant'
-
-.btn-primary
-  background-color ant-blue-5
-  &:hover
-    background-color ant-blue-4
-```
-
-完整的色阶导出：
-
-| 色板 | 单独色阶 | 主色 | 数组 |
-| --- | --- | --- | --- |
-| Red | `ANT_RED_0` ~ `ANT_RED_9` | `ANT_RED` | `ANT_RED_PALETTE` |
-| Volcano | `ANT_VOLCANO_0` ~ `ANT_VOLCANO_9` | `ANT_VOLCANO` | `ANT_VOLCANO_PALETTE` |
-| Orange | `ANT_ORANGE_0` ~ `ANT_ORANGE_9` | `ANT_ORANGE` | `ANT_ORANGE_PALETTE` |
-| Gold | `ANT_GOLD_0` ~ `ANT_GOLD_9` | `ANT_GOLD` | `ANT_GOLD_PALETTE` |
-| Yellow | `ANT_YELLOW_0` ~ `ANT_YELLOW_9` | `ANT_YELLOW` | `ANT_YELLOW_PALETTE` |
-| Lime | `ANT_LIME_0` ~ `ANT_LIME_9` | `ANT_LIME` | `ANT_LIME_PALETTE` |
-| Green | `ANT_GREEN_0` ~ `ANT_GREEN_9` | `ANT_GREEN` | `ANT_GREEN_PALETTE` |
-| Cyan | `ANT_CYAN_0` ~ `ANT_CYAN_9` | `ANT_CYAN` | `ANT_CYAN_PALETTE` |
-| Blue | `ANT_BLUE_0` ~ `ANT_BLUE_9` | `ANT_BLUE` | `ANT_BLUE_PALETTE` |
-| Geekblue | `ANT_GEEKBLUE_0` ~ `ANT_GEEKBLUE_9` | `ANT_GEEKBLUE` | `ANT_GEEKBLUE_PALETTE` |
-| Purple | `ANT_PURPLE_0` ~ `ANT_PURPLE_9` | `ANT_PURPLE` | `ANT_PURPLE_PALETTE` |
-| Magenta | `ANT_MAGENTA_0` ~ `ANT_MAGENTA_9` | `ANT_MAGENTA` | `ANT_MAGENTA_PALETTE` |
-| Gray | `ANT_GRAY_0` ~ `ANT_GRAY_9` | `ANT_GRAY` | `ANT_GRAY_PALETTE` |
+变量命名规则：`{stylePrefix}{color}`（主色）与 `{stylePrefix}{color}-{n}`（单级色阶）。
 
 ## 开发
 
 ```bash
-# 安装依赖
-pnpm install
-
-# 构建
-pnpm build
-
-# 开发模式（watch）
-pnpm dev
-
-# 运行 playground
-pnpm play
-
-# 运行测试
-pnpm test
-
-# 代码检查
-pnpm lint
-
-# 类型检查
-pnpm typecheck
-
-# 发布版本
-pnpm release
+pnpm install      # 安装依赖
+pnpm build        # 构建核心库
+pnpm dev          # watch 模式
+pnpm play         # 启动 playground 文档站点
+pnpm test         # 运行单元测试
+pnpm lint         # 代码检查
+pnpm typecheck    # 类型检查
+pnpm release      # 交互式版本发布
 ```
 
 ## 环境要求
